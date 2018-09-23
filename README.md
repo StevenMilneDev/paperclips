@@ -14,6 +14,11 @@ Once the dependencies have been installed you can run the server by typing the f
 
 This will start the HTTP server allowing you to play the game in your web browser at the address [localhost:1234](http://localhost:1234). When you are finished with the server you can press CTRL+C while in the terminal to stop the server.
 
+## Documentation
+The following pages contain technical information about how Universal Paperclips works. These are useful if you want to modify any parts of the game.
+
+- [Persistence](docs/persistence.md)
+
 ## Change Log
 This mirrored version of Universal Paperclips has been modified in the following ways;
 
