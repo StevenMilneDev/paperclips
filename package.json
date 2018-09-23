@@ -1,0 +1,30 @@
+{
+  "name": "@smilne/paperclips",
+  "version": "1.0.0",
+  "description": "A mirror of the clicker game Universal Paperclips",
+  "main": "public/index.html",
+  "scripts": {
+    "start": "http-server ./public -p 1234",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/IAmTehCreator/paperclips.git"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.smilne.co.uk/repository/npm-private/"
+  },
+  "keywords": [
+    "game",
+    "clicker",
+    "paperclips",
+    "ai"
+  ],
+  "author": "Steven <stevenimilne@outlook.com> (http://smilne.co.uk/)",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/IAmTehCreator/paperclips#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {}
+}
