@@ -1,100 +1,12 @@
-#mobile
-{
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 'Open Sans', sans-serif;
-  font-weight: 300; 
-  display: none;
-  width: 100%;
-  height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
-  background-image:
-    linear-gradient(
-       #444344, #fff 50%
-    );
-  }
-
-#mobile-content
-{
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#mobile-main-text
-{
-  font-size: 2.5vh;
-  margin-top: 3.0vh;
-  text-align: center;
-}
-
-#mobile-title img 
-{
-  margin-top: 20vh;
-  width: 100%;
-}
-
-#mobile-badges 
-{
-  margin-top: 3.0vh;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#mobile-badges img
-{
-  margin-bottom: 1.0vh;
-}
-
-#apple_badge
-{
-  width: 100%;
-}
-
-#google_badge 
-{
-  width: 114%;
-  margin-left: -7%;
-}
-
-#fake-android
-{
-  text-align: center;
-  width: 80%;
-  background-color: #d3d3d3;
-  padding: 10% 10%;
-  border-radius: 10px;
-  font-size: 1.7vh;
-}
-
-#mobile-footer
-{
-  float: right;
-  margin-top: 5vh;
-  margin-bottom: 2vh;
-  margin-right: 2vh;
-}
-
-#mobile-footer a
-{
-  font-weight: 700;
-  color: black;
-}
-
 @media only screen and (max-width: 700px)
 {
-  body 
+  body
   {
     margin: 0;
     padding: 0;
   }
 
-  #mobile 
-  {
-    display: block;
-  }
-
-  #page 
+  #page
   {
     display: none;
   }
@@ -129,13 +41,13 @@
 
 #qCompDisplay {
     margin-left: 3px;
-    
+
 }
 
 #swarmSliderDiv {
     position: relative;
     display: inline-block;
-    margin-bottom: 10px;  
+    margin-bottom: 10px;
 }
 
 #sliderLabelWork {
@@ -161,7 +73,7 @@
 
 .slider {
     width: 100%;
-    
+
 }
 
 h2 {
@@ -196,13 +108,13 @@ h2 {
     text-align: center;
     padding: 5px 0;
     border-radius: 3px;
-    
+
     position: absolute;
     z-index: 1;
     bottom: 75%;
     left: 50%;
     margin-left: -19px;
-    
+
     opacity: 0;
     transition: opacity 1s;
 }
@@ -229,16 +141,16 @@ h2 {
     text-align: center;
     padding: 5px 0;
     border-radius: 3px;
-    
+
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 11;
-    
+
     position: absolute;
     z-index: 1;
     bottom: 125%;
     left: 50%;
     margin-left: -15px;
-    
+
     opacity: 0;
     transition: opacity 1s;
 }
@@ -262,13 +174,13 @@ h2 {
     text-align: center;
     padding: 5px 0;
     border-radius: 3px;
-    
+
     position: absolute;
     z-index: 1;
     bottom: 27px;
     left: 80px;
     margin-left: 0px;
-    
+
     opacity: 0;
     transition: opacity 1s;
 }
@@ -315,7 +227,7 @@ h2 {
 }
 
 #harvesterMultiButtons {
-    margin-bottom: 2; 
+    margin-bottom: 2;
 }
 
 #wireDroneMultiButtons {
@@ -353,20 +265,20 @@ h2 {
 
 #increaseProbeTrustDiv {
   float: left;
-  width: 130px;  
+  width: 130px;
   margin-left: 5;
   border: 0;
 }
 
 #increaseMaxTrustDiv {
-  float: left;    
-  width: 150px;  
+  float: left;
+  width: 150px;
   margin: 0;
-  border: 0;    
+  border: 0;
 }
 
 #combatButtonDiv {
-  margin-top: 0;    
+  margin-top: 0;
 }
 
 #battleCanvasDiv {
@@ -382,7 +294,7 @@ h2 {
 canvas {
   display: block;
   margin-top: 0;
-  margin-bottom: 10;    
+  margin-bottom: 10;
   width: 310px;
   height: 150px;
   margin-left: auto;
@@ -391,9 +303,9 @@ canvas {
 }
 
 #hypnoDroneEventDiv {
-  
+
   float: left;
-  background: black;    
+  background: black;
   width: 100%;
 
 }
@@ -403,9 +315,9 @@ canvas {
 }
 
 #consoleDiv {
-  
+
   float: left;
-  background: black;    
+  background: black;
   width: 100%;
 }
 #topDIv {
@@ -424,64 +336,64 @@ canvas {
 #rightColumn {
   float: left;
   width: 320px;
-  margin-left: 10px;    
+  margin-left: 10px;
 }
 
 #investmentDiv1 {
   float: left;
-  width: 64px; 
-  line-height: 20%;    
+  width: 64px;
+  line-height: 20%;
 }
 
 #investmentDiv2 {
   float: left;
-  width: 65%; 
+  width: 65%;
   text-align: top;
-  margin-top: 0; 
-  margin-left: 5px;    
+  margin-top: 0;
+  margin-left: 5px;
 }
 
 #stratDiv1 {
   float: left;
-  width: 95px; 
-  line-height: 20%; 
+  width: 95px;
+  line-height: 20%;
 }
 
 #stratDiv2 {
   float: left;
-  width: 60%; 
+  width: 60%;
   text-align: top;
-  margin-top: 0; 
-  margin-left: 5px;   
+  margin-top: 0;
+  margin-left: 5px;
 }
 
 #vertPad {
   float: left;
-  width: 35%;    
+  width: 35%;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11;     
+  font-size: 11;
 }
 
 #vertStrat {
   float: right;
   text-align: center;
-  width: 65%;    
+  width: 65%;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11;     
+  font-size: 11;
 
 }
 
 #horizStrat {
-  float: left; 
+  float: left;
 
-  display: flex;    
+  display: flex;
   align-items: center;
 
-  justify-content: center;    
-  width: 25%;  
-  height: 56px;    
+  justify-content: center;
+  width: 25%;
+  height: 56px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11;     
+  font-size: 11;
 }
 
 #investmentEngineUpgrade {
@@ -504,27 +416,27 @@ canvas {
 .engine {
     margin: 5;
     border: 1px solid grey;
-    padding: 5; 
+    padding: 5;
 }
 
 .engine2 {
     margin: 5;
     border: 1px solid grey;
-    padding: 5; 
+    padding: 5;
 }
 
 .swarmEngine {
     margin-bottom: 5;
     border: 1px solid grey;
-    padding: 5; 
+    padding: 5;
 }
 
 .qEngine {
     margin-bottom: 10;
     border: 1px solid grey;
-    padding: 5; 
+    padding: 5;
     height: 70px;
-    
+
 }
 
 .qChip {
@@ -536,7 +448,7 @@ canvas {
     margin-bottom: 7;
     background-color: black;
     float: left;
-    
+
 }
 
 .engineText {
@@ -567,7 +479,7 @@ canvas {
     margin-left: 5;
     margin-top: 10;
     margin-bottom: 0;
-    
+
 }
 
 .engineText5 {
@@ -616,11 +528,11 @@ hr {
     margin-right: auto;
     border-style: inset;
     border-width: 1px;
-    
+
 }
 
 hr.short {
-    
+
     width: 225px;
     margin-left: 0;
 }
@@ -676,7 +588,7 @@ table.table2 td:nth-child(1) {
 
 table.table2 td:nth-child(n>1) {
     table-layout: fixed;
-    
+
 }
 
 table.table2 td{
@@ -690,7 +602,7 @@ p.clean {
     font-size: 11;
     margin-bottom: 0;
     margin-top: 1px;
-    
+
 }
 
 p.clean2 {
@@ -698,7 +610,7 @@ p.clean2 {
     font-size: 11;
     margin-bottom: 0;
     margin-top: 0px;
-    
+
 }
 
 p.clean3 {
@@ -706,7 +618,7 @@ p.clean3 {
     font-size: 11;
     margin-bottom: 5px;
     margin-top: 2px;
-    
+
 }
 
 
@@ -725,30 +637,30 @@ p.consoleOld {
 }
 
 p.hypnoDrone {
-    
+
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 150;
     color: white;
     line-height: 115px;
     margin-bottom: 0px;
     margin-top: 0px;
-    
+
 }
 
 .pulsate {
     -webkit-animation: pulsate .5s ease-out;
-    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-iteration-count: infinite;
     opacity: 0.0;
     }
 
 @-webkit-keyframes pulsate {
-    0% { 
+    0% {
         opacity: 0.0;
     }
-    50% { 
+    50% {
         opacity: 1.0;
     }
-    100% { 
+    100% {
         opacity: 0.0;
     }
 }
@@ -779,7 +691,7 @@ p.hypnoDrone {
     width: 275px;
     background: #d1d1d1;
     border: 1px solid rgba(0, 0, 0, 1);
-    
+
 }
 
 .projectButton:disabled {
@@ -789,14 +701,14 @@ p.hypnoDrone {
 .button {
    border: 1px solid #1a1a1a;
    background: #666666;
-  
+
    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
    background: -webkit-linear-gradient(top, #ffffff, #888888);
    background: -moz-linear-gradient(top, #ffffff, #888888);
    background: -ms-linear-gradient(top, #ffffff, #888888);
    background: -o-linear-gradient(top, #ffffff, #888888);
    background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
-    
+
    padding: 12.5px 25px;
    -webkit-border-radius: 3px;
    -moz-border-radius: 3px;
@@ -849,14 +761,14 @@ p.hypnoDrone {
 .button2 {
    border: 1px solid #1a1a1a;
    background: #666666;
-    
+
    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
    background: -webkit-linear-gradient(top, #ffffff, #888888);
    background: -moz-linear-gradient(top, #ffffff, #888888);
    background: -ms-linear-gradient(top, #ffffff, #888888);
    background: -o-linear-gradient(top, #ffffff, #888888);
    background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
-    
+
    padding: 2px 4px;
    -webkit-border-radius: 2px;
    -moz-border-radius: 2px;
@@ -877,21 +789,21 @@ p.hypnoDrone {
    border: 1px solid #898989;
    text-shadow: #d4d4d4 0 1px 0;
    background: #616161;
-    
+
    background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#888888));
    background: -webkit-linear-gradient(top, #f7f7f7, #888888);
    background: -moz-linear-gradient(top, #f7f7f7, #888888);
    background: -ms-linear-gradient(top, #f7f7f7, #888888);
    background: -o-linear-gradient(top, #f7f7f7, #888888);
    background-image: -ms-linear-gradient(top, #f7f7f7 0%, #888888 100%);
-    
+
    color: #000000;
    }
 
 .button2:active {
    text-shadow: #bfbfbf 0 1px 0;
    border: 1px solid #2e2e2e;
-    
+
    background: #d9d9d9;
    background: -webkit-gradient(linear, left top, left bottom, from(#595959), to(#616161));
    background: -webkit-linear-gradient(top, #595959, #d9d9d9);
@@ -899,7 +811,7 @@ p.hypnoDrone {
    background: -ms-linear-gradient(top, #595959, #d9d9d9);
    background: -o-linear-gradient(top, #595959, #d9d9d9);
    background-image: -ms-linear-gradient(top, #595959 0%, #d9d9d9 100%);
-   
+
    color: #444444;
    }
 
@@ -907,4 +819,3 @@ p.hypnoDrone {
    opacity: 0.6;
    border: 1px solid #ffffff;
 }
-
