@@ -8,12 +8,12 @@ Universal Paperclips is a strangely addictive game! I wanted to make this mirror
 - The gift shop div has been removed
 
 ## Building
-The original version of Paperclips was hosted in an Apache web server, this mirror instead uses the [Parcel](https://parceljs.org/) web bundler to setup a local development server. An NPM `package.json` file has been included within this mirror to hold build scripts and dependencies. Before you run the server you must install the dependencies with the following command;
+The original version of Paperclips was hosted in an Apache web server, this mirror instead uses a simple NodeJS HTTP server. To run the server you must first install the dependencies using NPM, you can do this by typing the following command into the terminal when you are in the root directory of this repository;
 
 > `npm install`
 
-Once the dependencies have been installed you can run the following command to start the server;
+Once the dependencies have been installed you can run the server by typing the following command in the terminal;
 
 > `npm start`
 
-Once the server is running you can play the game in your browser by going to [http://localhost:1234](http://localhost:1234). When you are finished using the server you can press Control + C within the terminal running the server to stop it.
+This will start the HTTP server allowing you to play the game in your web browser at the address [localhost:1234](http://localhost:1234). When you are finished with the server you can press CTRL+C while in the terminal to stop the server.

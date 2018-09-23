@@ -4,9 +4,7 @@
   "description": "A mirror of the clicker game Universal Paperclips",
   "main": "index.htm",
   "scripts": {
-    "clean": "rm -fr .cache && rm -fr dist",
-    "start": "parcel index.htm",
-    "build": "parcel build",
+    "start": "http-server ./ -p 1234",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +24,7 @@
   "license": "UNLICENSED",
   "homepage": "https://bitbucket.org/IAmTehCreator/paperclips#readme",
   "devDependencies": {
-    "parcel-bundler": "^1.9.7"
-  }
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {}
 }
