@@ -22,6 +22,7 @@ The following pages contain technical information about how Universal Paperclips
 ## Change Log
 This mirrored version of Universal Paperclips has been modified in the following ways;
 
+- Dynamically show and hide debug buttons when `debug()` function called
 - Google Analytics has been removed
 - The Android and IOS app adverts have been removed
 - The gift shop div has been removed
