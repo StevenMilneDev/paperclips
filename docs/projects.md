@@ -53,6 +53,7 @@ var project999 = {
   effect: () => {
     // Consume project cost
     creativity -= 100000;
+    project999.flag = 1;
 
     // Perform effect
     displayMessage('Indeed, you are living in a simulation! You know what that means... A sneaky exploit could steal CPU cycles from the host!');
