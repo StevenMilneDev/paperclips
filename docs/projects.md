@@ -70,3 +70,5 @@ var project999 = {
 
 projects.push(project999);
 ```
+
+Since everything is global, custom projects have just as much power as the native projects do. However there is no way to easily add new currencies or DOM for a project without modifying the core game files.
