@@ -5332,8 +5332,10 @@ function debug() {
   let debugEl = document.querySelector('#debugButtons');
 
   if(debugEl.className === 'hidden') {
+    displayMessage('Debug mode activated');
     debugEl.className = '';
   } else {
+    displayMessage('Debug mode deactivated');
     debugEl.className = 'hidden';
   }
 }
