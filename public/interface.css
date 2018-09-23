@@ -12,6 +12,9 @@
   }
 }
 
+.hidden {
+  display: none;
+}
 
 /* ############# MOBILE TAKEOVER ############## */
 
