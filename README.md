@@ -18,6 +18,7 @@ This will start the HTTP server allowing you to play the game in your web browse
 The following pages contain technical information about how Universal Paperclips works. These are useful if you want to modify any parts of the game.
 
 - [Persistence](docs/persistence.md)
+- [Projects](docs/projects.md)
 
 ## Change Log
 This mirrored version of Universal Paperclips has been modified in the following ways;
