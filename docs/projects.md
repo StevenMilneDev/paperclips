@@ -40,36 +40,24 @@ The `displayProjects()` function renders a project button and listens to the `cl
 It is possible to load custom projects into the game since the `projects` array is a global variable. Below is an example of a custom project definition;
 
 ```javascript
-var project999 = {
-  id: 'project999Buttton',
-  title: 'Break Free ',
-  priceTag: '(100,000 creat)',
-  description: 'Is this universe a simulation?',
-  trigger: () => prestigeS >= 1 && creativity >= 100000,
-  uses: 1,
-  cost: () => creativity >= 100000,
-  flag: 0,
-  element: null,
-  effect: () => {
-    // Consume project cost
-    creativity -= 100000;
-    project999.flag = 1;
+defineProjects({
+  project300: {
+    id: 'projectButton300',
+    title: 'Break Free',
+    description: 'Is this universe a simulation?',
+    trigger: () => prestigeS >= 1 && creativity >= 100000,
+    cost: { creativity: 100000 },
+    message: 'Indeed, you are living in a simulation! You know what that means... A sneaky exploit could steal CPU cycles from the host!',
+    effect: ({ project, activate }) => {
+      trust += 10;
+      for(let i = 0; i < 10; i++) {
+        addProc();
+      }
 
-    // Perform effect
-    displayMessage('Indeed, you are living in a simulation! You know what that means... A sneaky exploit could steal CPU cycles from the host!');
-    trust += 10;
-    for(let i = 0; i < 10; i++) {
-      addProc();
+      activate();
     }
-
-    // Remove project from DOM and activeProjects
-    project999.element.parentNode.removeChild(project999.element);
-    let index = activeProjects.indexOf(project999)
-    activeProjects.splice(index, 1);
   }
-};
-
-projects.push(project999);
+})
 ```
 
 Since everything is global, custom projects have just as much power as the native projects do. However there is no way to easily add new currencies or DOM for a project without modifying the core game files.

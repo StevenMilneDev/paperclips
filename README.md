@@ -23,6 +23,8 @@ The following pages contain technical information about how Universal Paperclips
 ## Change Log
 This mirrored version of Universal Paperclips has been modified in the following ways;
 
+- Added a custom project that can be used in prestige games
+- Refactored project management code, moving it into the slow game loop to improve performance
 - Refactored saving and loading to have less duplicated code
 - Dynamically show and hide debug buttons when `debug()` function called
 - Google Analytics has been removed
