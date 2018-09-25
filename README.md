@@ -17,11 +17,16 @@ This will start the HTTP server allowing you to play the game in your web browse
 ## Documentation
 The following pages contain technical information about how Universal Paperclips works. These are useful if you want to modify any parts of the game.
 
+- [General](docs/general.md)
 - [Persistence](docs/persistence.md)
+- [Projects](docs/projects.md)
 
 ## Change Log
 This mirrored version of Universal Paperclips has been modified in the following ways;
 
+- Added a custom project that can be used in prestige games
+- Refactored project management code, moving it into the slow game loop to improve performance
+- Refactored saving and loading to have less duplicated code
 - Dynamically show and hide debug buttons when `debug()` function called
 - Google Analytics has been removed
 - The Android and IOS app adverts have been removed

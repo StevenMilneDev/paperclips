@@ -865,57 +865,100 @@ function qComp(){
 
 }
 
+function costToString(project) {
+  if(project.priceTag) {
+    return project.priceTag;
+  }
 
+  let str = '';
+  for(let currency in project.cost) {
+    str += `, ${project.cost[currency]} ${currency}`;
+  }
+
+  return `(${str.substr(2)})`;
+}
+
+function canAfford(cost) {
+  if(typeof cost === 'function') {
+    return cost();
+  }
+
+  for(let currency in cost) {
+    if(window[currency] < cost[currency]) {
+      return false;
+    }
+  }
+
+  return true;
+}
 
 function manageProjects(){
 
-    for(var i = 0; i < projects.length; i++){
-        if (projects[i].trigger() && (projects[i].uses > 0)){
-            displayProjects(projects[i]);
-            projects[i].uses = projects[i].uses - 1;
-            activeProjects.push(projects[i]);
-        }
-    }
+  for(var i = 0; i < projects.length; i++){
+    let project = projects[i];
 
-
-    for(var i = 0; i < activeProjects.length; i++){
-        if (activeProjects[i].cost()){
-            activeProjects[i].element.disabled = false;
-        } else {
-            activeProjects[i].element.disabled = true;
-        }
+    if (project.trigger() && project.uses > 0){
+      displayProjects(project);
+      project.uses -= 1;
+      activeProjects.push(project);
     }
+  }
+
+  for(var i = 0; i < activeProjects.length; i++){
+    let project = activeProjects[i];
+
+    project.element.disabled = !canAfford(project.cost);
+  }
 }
 
+function getTemplate(template, newId, values) {
+  var templateEl = document.querySelector('#' + template).cloneNode(true);
+  templateEl.setAttribute('id', newId);
+
+  for (let selector in values) {
+    templateEl.querySelector(selector).innerHTML = values[selector];
+  }
+
+  return templateEl;
+}
+
+function consume(currency, value) {
+  var total = window[currency] - value;
+
+  window[currency] = total;
+}
+
+function consumeCurrencies(valueByCurrency) {
+  for(let currency in valueByCurrency) {
+    consume(currency, valueByCurrency[currency])
+  }
+}
 
 function displayProjects(project){
+  var templateEl = getTemplate('projectButtonTemplate', project.id, {
+    '.project-button__title': project.title,
+    '.project-button__cost': costToString(project),
+    '.project-button__description': project.description
+  })
 
-    project.element = document.createElement("button");
-project.element.setAttribute("id", project.id);
+  function activate() {
+    consumeCurrencies(project.cost)
+    project.flag = 1;
+    projectListTopElement.removeChild(templateEl);
+    activeProjects.splice(activeProjects.indexOf(project), 1);
+  }
 
-project.element.onclick = function(){project.effect()};
+  templateEl.addEventListener('click', function () {
+    project.effect({ project, activate });
+    if(project.message) {
+      displayMessage(project.message)
+    }
+  })
 
-project.element.setAttribute("class", "projectButton");
-    projectListTopElement.appendChild(project.element, projectListTopElement.firstChild);
+  projectListTopElement.appendChild(templateEl);
+  project.element = templateEl;
 
-    var span = document.createElement("span");
-    span.style.fontWeight = "bold";
-project.element.appendChild(span);
-
-    var title = document.createTextNode(project.title);
-    span.appendChild(title);
-
-    var cost = document.createTextNode(project.priceTag);
-project.element.appendChild(cost);
-
-    var div = document.createElement("div");
-project.element.appendChild(div);
-
-    var description = document.createTextNode(project.description);
-    project.element.appendChild(description);
-
-    blink(project.element);
-
+  blink(templateEl);
 }
 
 //  HYPNODRONE EVENT ----------------------------------------------------------------
@@ -4204,7 +4247,6 @@ window.setInterval(function(){
     }
 
     updateStats();
-    manageProjects();
     milestoneCheck();
 
 
@@ -4566,6 +4608,7 @@ window.setInterval(function(){
     // Wire Price Fluctuation
 
     adjustWirePrice();
+    manageProjects();
 
     // Sales Calculator
 
