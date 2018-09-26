@@ -1,3 +1,25 @@
+function applyProjectDefaults(config, defaults) {
+  for(let property in defaults) {
+    if (config[property] === undefined) {
+      config[property] = defaults[property];
+    }
+  }
+}
+
+function defineProjects(projectsByName) {
+  for(let name in projectsByName) {
+    let config = projectsByName[name];
+    applyProjectDefaults(config, {
+      element: null,
+      uses: 1,
+      flag: 0
+    });
+
+    window[name] = config;
+    projects.push(config);
+  }
+}
+
 function hasExistingSave() {
   return localStorage.getItem('saveGame') != null;
 }

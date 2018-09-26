@@ -1,4 +1,8 @@
-var game = new GameLoop();
+
+var Paperclips = {};
+
+Paperclips.game = new GameLoop();
+Paperclips.PluginManager = new PluginManager();
 
 // If there is save data then load it
 if (hasExistingSave()) {
@@ -10,7 +14,7 @@ if (hasExistingSave()) {
   }
 }
 
-game.onFast([
+Paperclips.game.onFast([
   incrementTicks,
   milestoneCheck,
   buttonUpdate,
@@ -47,7 +51,7 @@ game.onFast([
   withCreativity(calculateCreativity)
 ])
 
-game.onSlow([
+Paperclips.game.onSlow([
   adjustWirePrice,
   manageProjects,
   withHumans(chain([
@@ -64,7 +68,7 @@ game.onSlow([
   throttle(250, save)
 ]);
 
-game.onRender([
+Paperclips.game.onRender([
   renderStockList,
   synchroniseStratPicker,
   buttonUpdate,
@@ -183,4 +187,4 @@ game.onRender([
   ])))
 ]);
 
-game.start();
+Paperclips.game.start();
