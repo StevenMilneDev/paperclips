@@ -872,7 +872,7 @@ function costToString(project) {
 
   let str = '';
   for(let currency in project.cost) {
-    str += `, ${project.cost[currency]} ${currency}`;
+    str += `, ${project.cost[currency]} ${formatWithCommas(currency)}`;
   }
 
   return `(${str.substr(2)})`;
@@ -1472,7 +1472,6 @@ var portfolioSize = 0;
 var stockID = 0;
 var secTotal = 0;
 var portTotal = 0;
-var sellDelay = 0;
 var riskiness = 5;
 var maxPort = 5;
 var m = 0;
@@ -1657,76 +1656,48 @@ function updateStocks(){
 
 // Stock List Display Routine
 
-window.setInterval(function(){
+function renderStockList() {
+  if (investStratElement.value=="low"){
+    riskiness = 7;
+  } else if (investStratElement.value=="med"){
+    riskiness = 5;
+  } else {
+    riskiness = 1;
+  }
 
-    if (investStratElement.value=="low"){
-        riskiness = 7;
-    } else if (investStratElement.value=="med"){
-        riskiness = 5;
-    } else {
-        riskiness = 1;
-    }
+  m = 0;
+  for (let i = 0; i < portfolioSize; i++){
+    m = m + stocks[i].total;
+  }
 
-    m = 0;
+  secTotal = m;
+  portTotal = bankroll + secTotal;
 
-    for (var i=0; i<portfolioSize; i++){
-        m = m + stocks[i].total;
-    }
+  secValueElement.innerHTML = formatWithCommas(secTotal);
+  portValueElement.innerHTML = formatWithCommas(portTotal);
 
-    secTotal = m;
+  portfolioSize = stocks.length;
+  for (let i = 1; i <= portfolioSize; i++) {
+    let n = i.toString();
+    let s = i-1;
 
-    portTotal = bankroll + secTotal;
-
-    secValueElement.innerHTML = formatWithCommas(secTotal);
-    portValueElement.innerHTML = formatWithCommas(portTotal);
-
-portfolioSize = stocks.length;
-
-for (var i = 1; i<=portfolioSize; i++){ //m@ todo make this into an array ok?
-    var n = i.toString();
-    var s = i-1;
     stockSymbolElements[i-1].innerHTML=stocks[s].symbol;
     stockAmountElements[i-1].innerHTML=Math.ceil(stocks[s].amount);
     stockPriceElements[i-1].innerHTML=Math.ceil(stocks[s].price);
     stockTotalElements[i-1].innerHTML=Math.ceil(stocks[s].total);
     stockProfitElements[i-1].innerHTML=Math.ceil(stocks[s].profit);
-}
+  }
 
-var firstBlankSlot = portfolioSize + 1;
+  let firstBlankSlot = portfolioSize + 1;
 
-// for(var i = firstBlankSlot; i <= 5; i++){   <------ Frank Fix
-
-  for(var i = firstBlankSlot; i < 5; i++){
+  for (let i = firstBlankSlot; i < 5; i++){
     stockSymbolElements[i].innerHTML="&nbsp";
     stockAmountElements[i].innerHTML="&nbsp";
     stockPriceElements[i].innerHTML="&nbsp";
     stockTotalElements[i].innerHTML="&nbsp";
     stockProfitElements[i].innerHTML="&nbsp";
-    }
-
-}, 100);
-
-window.setInterval(function(){
-if (humanFlag == 1){
-stockShop();
+  }
 }
-}, 1000);
-
-
-window.setInterval(function(){
-
-sellDelay = sellDelay+1;
-
-if (portfolioSize>0 && sellDelay >= 5 && Math.random()<=.3 && humanFlag == 1){
-    sellStock();
-    sellDelay = 0;
-    }
-
-if (portfolioSize>0 && humanFlag == 1){
-    updateStocks();
-    }
-
-}, 2500);
 
 //-------------------STRATEGY-----------------------------------------------------
 
@@ -2357,9 +2328,7 @@ function round(roundNum){
     }
 
 window.setInterval(function(){
-
-pick = stratPickerElement.value;
-
+  pick = stratPickerElement.value;
 }, 100);
 
 
@@ -4597,50 +4566,65 @@ if (dismantle >= 7) {
 
 }, 10);
 
-// Slow Loop
+function withHumans(callback) {
+  return function () {
+    if(!humanFlag) return;
 
-var saveTimer = 0;
-var secTimer = 0;
+    callback();
+  }
+}
 
+function throttle(callback, iterations) {
+  let count = 0;
 
-window.setInterval(function(){
-
-    // Wire Price Fluctuation
-
-    adjustWirePrice();
-    manageProjects();
-
-    // Sales Calculator
-
-    if (humanFlag==1){
-
-        if (Math.random() < (demand/100)){
-            sellClips(Math.floor(.7 * Math.pow(demand, 1.15)));
-            }
-
-
-    // Fire Once a Second
-
-    secTimer++;
-        if (secTimer >= 10){
-            calculateRev();
-            secTimer = 0;
-        }
-
+  return function () {
+    if(++count >= iterations) {
+      count = 0;
+      callback();
     }
+  }
+}
 
+function withStock(callback) {
+  return function () {
+    if(portfolioSize <= 0) return;
 
-    // Auto-Save
+    callback()
+  }
+}
 
-    saveTimer++;
-    if (saveTimer >= 250) {
-        save();
-        saveTimer = 0;
-    }
+function atRandom(callback, chance) {
+  return function () {
+    if(Math.random() >= chance) return;
 
+    callback()
+  }
+}
 
-}, 100);
+function salesCalculator() {
+  if (Math.random() < (demand/100)){
+    sellClips(Math.floor(.7 * Math.pow(demand, 1.15)));
+  }
+}
 
+var game = new GameLoop();
+
+game.onSlow([
+  adjustWirePrice,
+  manageProjects,
+  withHumans(salesCalculator),
+  withHumans(throttle(calculateRev, 10)),
+  throttle(save, 250),
+  withHumans(throttle(stockShop, 10)),
+  withHumans(withStock(throttle(atRandom(sellStock, 0.3), 25))),
+  withHumans(withStock(throttle(updateStocks, 25)))
+]);
+
+game.onRender([
+  renderStockList
+])
+
+game.start();
 
 // Saving and Loading
 
@@ -4955,7 +4939,6 @@ for(var i=0; i < activeProjects.length; i++){
         stockID: stockID,
         secTotal: secTotal,
         portTotal: portTotal,
-        sellDelay: sellDelay,
         riskiness: riskiness,
         maxPort: maxPort,
         m: m,
@@ -5253,7 +5236,6 @@ function load( slotNumber = 0 ) {
         stockID = loadGame.stockID;
         secTotal = loadGame.secTotal;
         portTotal = loadGame.portTotal;
-        sellDelay = loadGame.sellDelay;
         riskiness = loadGame.riskiness;
         maxPort = loadGame.maxPort;
         m = loadGame.m;
