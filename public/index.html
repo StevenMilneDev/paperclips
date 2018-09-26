@@ -1,96 +1,82 @@
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="interface.css" />
-
-    </head>
-
-    <body>
-
-<!--     <audio id="threnody1">
-        <source src="test.mp3" type="audio/mpeg">
-
-    </audio>   -->
-
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="interface.css" />
+  </head>
+  <body>
     <div id="page">
+      <div id="cover"></div>
 
-    <div id="cover">
-    </div>
+      <div id="hypnoDroneEventDiv">
+        <p class = "hypnoDrone"><span id = hypnoDroneText></span></p>
+      </div>
 
-        <div id="hypnoDroneEventDiv">
-            <p class = "hypnoDrone"><span id = hypnoDroneText></span></p>
-        </div>
-
-        <div id="consoleDiv">
-
-            <p class = "consoleOld">
-                <span>&nbsp;.&nbsp;</span><span id="readout5"></span><br />
-                <span>&nbsp;.&nbsp;</span><span id="readout4"></span><br />
-                <span>&nbsp;.&nbsp;</span><span id="readout3"></span><br />
-                <span>&nbsp;.&nbsp;</span><span id="readout2"></span><br />
-            </p>
-            <p class = "console">
-                <span>&nbsp;>&nbsp;</span><span id="readout1">Welcome to Universal Paperclips</span><span id="cursor" class = "pulsate">|</span>
-            </p>
-
-        </div>
-
-        <div id="topDiv">
-
-            <div id="prestigeDiv">
-
-            &nbsp;Universe: <span id = "prestigeUcounter">0</span> / Sim Level: <span id = "prestigeScounter">0</span>
-
-            </div>
-        <div class = "toolTip">
-        <span id = "clipCountCrunched" class = "toolTipText">total clips produced</span>
-        <h2>Paperclips: <span id="clips">0</span></h2>
-        </div>
-
-        </div>
-
-        <div id="leftColumn">
-
-        <button class = "button2" id ="btnMakePaperclip" onclick="clipClick(1)">Make Paperclip</button><br />
-        <br />
-
-        <div id = "creationDiv">
-
-        <b>Manufacturing</b><br />
-        <hr>
-        <div id = factoryUpgradeDisplay>
-        <p class = "clean">
-        Next Upgrade at: <span id = "nextFactoryUpgrade">0</span> Factories <br />
+      <div id="consoleDiv">
+        <p class = "consoleOld">
+          <span>&nbsp;.&nbsp;</span><span id="readout5"></span><br />
+          <span>&nbsp;.&nbsp;</span><span id="readout4"></span><br />
+          <span>&nbsp;.&nbsp;</span><span id="readout3"></span><br />
+          <span>&nbsp;.&nbsp;</span><span id="readout2"></span><br />
         </p>
+        <p class = "console">
+          <span>&nbsp;>&nbsp;</span><span id="readout1">Welcome to Universal Paperclips</span><span id="cursor" class = "pulsate">|</span>
+        </p>
+      </div>
+
+      <div id="topDiv">
+        <div id="prestigeDiv">
+          &nbsp;Universe: <span id = "prestigeUcounter">0</span> / Sim Level: <span id = "prestigeScounter">0</span>
         </div>
 
-        <div id = "clipsPerSecDiv">
-        Clips per Second: <span id="clipmakerRate2">0</span><br />
+        <div class="toolTip">
+          <span id="clipCountCrunched" class="toolTipText">total clips produced</span>
+          <h2>Paperclips: <span id="clips">0</span></h2>
         </div>
+      </div>
 
-        <div id = "tothDiv">
-        Unused Clips: <span id="unusedClipsDisplay">0</span><br />
-        </div>
+      <div id="leftColumn">
+        <button class="button2" id="btnMakePaperclip" onclick="clipClick(1)">Make Paperclip</button>
+
+        <br />
         <br />
 
+        <div id="creationDiv">
+          <b>Manufacturing</b><br />
+          <hr>
+          <div id=factoryUpgradeDisplay>
+            <p class="clean">
+              Next Upgrade at: <span id="nextFactoryUpgrade">0</span> Factories <br />
+            </p>
+          </div>
 
-        <div id = "factoryDiv">
-        <p class = "engineText5">
-        <button class = "button2" id = "btnMakeFactory"
-        onclick="makeFactory()">Clip Factory</button> <span class = "engineText6" id="factoryLevelDisplay">0</span></p>
+          <div id="clipsPerSecDiv">
+            Clips per Second: <span id="clipmakerRate2">0</span><br />
+          </div>
 
-        <div class = "toolTip3">
+          <div id="tothDiv">
+            Unused Clips: <span id="unusedClipsDisplay">0</span><br />
+          </div>
 
-        <span id = "factoryRebootToolTip" class = "toolTipText3">0</span>
+          <br />
 
-        <button class = "button2" id = "btnFactoryReboot" onclick="factoryReboot()">&nbsp Disassemble All &nbsp</button>
+          <div id="factoryDiv">
+            <p class="engineText5">
+              <button class="button2" id="btnMakeFactory" onclick="makeFactory()">Clip Factory</button>
+              <span class="engineText6" id="factoryLevelDisplay">0</span>
+            </p>
 
-        </div>
-        <br />
+            <div class="toolTip3">
+              <span id="factoryRebootToolTip" class="toolTipText3">0</span>
+              <button class="button2" id="btnFactoryReboot" onclick="factoryReboot()">&nbsp Disassemble All &nbsp</button>
+            </div>
 
-        Cost: <span id="factoryCostDisplay">0</span> clips<br />
-        <br />
-        </div>
+            <br />
+
+            Cost: <span id="factoryCostDisplay">0</span> clips
+
+            <br />
+            <br />
+          </div>
 
         <div id="wireTransDiv">
         Wire: <span id="transWire">0</span> <span id = "inchSpan">inches</span><br />
@@ -897,21 +883,27 @@
 -->
 
         <!-- HTML Templates -->
-        <div class="hidden">
-          <button id="projectButtonTemplate" class="projectButton">
-            <span class="project-button__title">TITLE</span>
-            <span class="project-button__cost">COST</span>
-            <p class="project-button__description">DESCRIPTION</p>
-          </button>
-        </div>
+      <div class="hidden">
+        <button id="projectButtonTemplate" class="projectButton">
+          <span class="project-button__title">TITLE</span>
+          <span class="project-button__cost">COST</span>
+          <p class="project-button__description">DESCRIPTION</p>
+        </button>
+      </div>
 
+    </div>
 
-        </div>
-        <script type="text/javascript" src="combat.js"></script>
-        <script type="text/javascript" src="globals.js"></script>
-        <script type="text/javascript" src="projects.js"></script>
-        <script type="text/javascript" src="main.js"></script>
-        <script type="text/javascript" src="custom/projects.js"></script>
+    <!-- Core game scripts -->
+    <script type="text/javascript" src="combat.js"></script>
+    <script type="text/javascript" src="globals.js"></script>
+    <script type="text/javascript" src="projects.js"></script>
+    <script type="text/javascript" src="logic.js"></script>
 
-    </body>
+    <!-- Extension -->
+    <script type="text/javascript" src="GameLoop.js"></script>
+    <script type="text/javascript" src="pipeline-methods.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="custom/projects.js"></script>
+  </body>
 </html>
