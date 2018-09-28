@@ -33,6 +33,15 @@
     this.element.className = 'panel hidden';
   };
 
+  Panel.prototype.toggle = function toggle() {
+    if (this.isShown()) {
+      this.hide();
+      return;
+    }
+
+    this.show();
+  };
+
   Panel.prototype.update = function update(contentBySelector) {
     const content = this.getContent();
     for (let selector in contentBySelector) {
