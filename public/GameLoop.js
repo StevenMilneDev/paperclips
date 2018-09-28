@@ -67,6 +67,10 @@
    * @param {Function[]} callbacks An array of callbacks to invoke on the slow loop
    */
   GameLoop.prototype.onSlow = function onSlow(callbacks) {
+    if (typeof callbacks === 'function') {
+      return this.register(Type.SLOW, callbacks)
+    }
+
     for(let callback of callbacks) {
       this.register(Type.SLOW, callback)
     }
@@ -78,6 +82,10 @@
    * @param {Function[]} callbacks An array of callbacks to invoke on the fast loop
    */
   GameLoop.prototype.onFast = function onFast(callbacks) {
+    if (typeof callbacks === 'function') {
+      return this.register(Type.FAST, callbacks)
+    }
+
     for(let callback of callbacks) {
       this.register(Type.FAST, callback)
     }
@@ -89,6 +97,10 @@
    * @param {Function[]} callbacks An array of callbacks to invoke on the render loop
    */
   GameLoop.prototype.onRender = function onRender(callbacks) {
+    if (typeof callbacks === 'function') {
+      return this.register(Type.RENDER, callbacks)
+    }
+
     for(let callback of callbacks) {
       this.register(Type.RENDER, callback)
     }

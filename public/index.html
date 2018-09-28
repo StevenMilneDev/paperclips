@@ -2,6 +2,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="interface.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
   </head>
   <body>
     <div id="page">
@@ -309,108 +310,115 @@
 <!--Right Column-->
 
         <div id="middleColumn">
+          <div id="compDiv">
+            <b>Computational Resources</b><br />
+            <hr>
+
+            <div id="trustDiv">
+              Trust: <span id="trust">2</span><br />
+              +1 Trust at: <span id="nextTrust">1000</span> clips<br />
+              <br />
+            </div>
+
+            <div id="swarmGiftDiv">
+              Swarm Gifts: <span id="swarmGifts">0</span><br />
+            </div>
 
 
+            <div id="processorDisplay">
+              <button class="button2" id="btnAddProc" onclick="addProc()">Processors</button>
+              <span class="engineText10" id="processors">1</span>
+            </div>
 
-        <div id="compDiv">
-        <b>Computational Resources</b><br />
-        <hr>
+            <br />
 
-        <div id="trustDiv">
-        Trust: <span id="trust">2</span><br />
-        +1 Trust at: <span id="nextTrust">1000</span> clips<br />
-        <br />
-        </div>
+            <div id="memoryDisplay">
+              <button class="button2" id="btnAddMem" onclick="addMem()">&nbsp Memory &nbsp</button>
+              <span class="engineText10" id="memory">1</span>
+            </div>
 
-        <div id="swarmGiftDiv">
-        Swarm Gifts: <span id="swarmGifts">0</span><br />
-        </div>
+            <br />
 
+            <br />
+            Operations: <span id="operations">0</span> / <span id="maxOps">1,000</span><br />
 
-        <div id = "processorDisplay">
-        <button class = "button2" id="btnAddProc" onclick="addProc()">Processors</button>
-        <span class="engineText10" id="processors">1</span>
-        </div>
+            <div id = "creativityDiv">
+              Creativity: <span id="creativity">0</span>
+            </div>
 
-        <br />
-
-        <div id = "memoryDisplay">
-        <button class = "button2" id="btnAddMem" onclick="addMem()">&nbsp Memory &nbsp</button>
-        <span class="engineText10" id="memory">1</span>
-        </div>
-
-        <br />
-
-        <br />
-        Operations: <span id="operations">0</span> / <span id="maxOps">1,000</span><br />
-
-        <div id = "creativityDiv">
-
-        Creativity: <span id="creativity">0</span>
-
-        </div>
-
-         <br />
+            <br />
 
         <div class = "swarmEngine" id = "swarmEngine">
+          <b>Swarm Computing</b>
+          <br />
+          Drones: <span id="swarmSize">0</span>
+          <br />
 
-        <b>Swarm Computing</b><br />
-        Drones: <span id="swarmSize">0</span><br />
-        <div id ="swarmStatusDiv">Status: <span id="swarmStatus">x </span></div>
-        <div id="giftTimer">Next gift in <span id="giftCountdown">17 seconds</span></div>
+          <div id ="swarmStatusDiv">Status: <span id="swarmStatus">x </span></div>
+          <div id="giftTimer">Next gift in <span id="giftCountdown">17 seconds</span></div>
 
-        <div id="feedButtonDiv"><button class = "button2" id = "btnFeedSwarm" onclick = "feedSwarm()">Feed the Swarm</button> <br />
-        Cost: <span id="swarmFeedCost">0</span> MWs</div>
+          <div id="feedButtonDiv">
+            <button class = "button2" id = "btnFeedSwarm" onclick = "feedSwarm()">Feed the Swarm</button>
+            <br />
+            Cost: <span id="swarmFeedCost">0</span> MWs
+          </div>
 
-        <div id="teachButtonDiv"><button class = "button2" id = "btnTeachSwarm" onclick = "teachSwarm()">Teach the Swarm</button><br />
-        Cost: <span id="swarmFeedCost">0</span> MWs</div>
+          <div id="teachButtonDiv">
+            <button class = "button2" id = "btnTeachSwarm" onclick = "teachSwarm()">Teach the Swarm</button>
+            <br />
+            Cost: <span id="swarmFeedCost">0</span> MWs
+          </div>
 
-        <div id="entertainButtonDiv"><button class = "button2" id = "btnEntertainSwarm" onclick = "entertainSwarm()">Entertain the Swarm</button><br />
-        Cost: <span id="swarmEntertainCost">0</span> creat</div>
+          <div id="entertainButtonDiv">
+            <button class = "button2" id = "btnEntertainSwarm" onclick = "entertainSwarm()">Entertain the Swarm</button>
+            <br />
+            Cost: <span id="swarmEntertainCost">0</span> creat
+          </div>
 
-        <div id="cladButtonDiv"><button class = "button2" id = "btnCladSwarm" onclick = "cladSwarm()">Clad the Swarm</button><br />
-        Cost: <span id="swarmFeedCost">0</span> MWs</div>
+          <div id="cladButtonDiv">
+            <button class = "button2" id = "btnCladSwarm" onclick = "cladSwarm()">Clad the Swarm</button>
+            <br />
+            Cost: <span id="swarmFeedCost">0</span> MWs
+          </div>
 
-        <div id="synchButtonDiv"><button class = "button2" id = "btnSynchSwarm" onclick = "synchSwarm()">Synchronize the Swarm</button><br />
-        Cost: <span id="swarmFeedCost">5,000</span> yomi</div>
+          <div id="synchButtonDiv">
+            <button class = "button2" id = "btnSynchSwarm" onclick = "synchSwarm()">Synchronize the Swarm</button>
+            <br />
+            Cost: <span id="swarmFeedCost">5,000</span> yomi
+          </div>
         </div>
 
         <div id = "swarmSliderDiv">
-        <div id = "sliderLabelWork">Work</div>
-        <div id = "swarmSlider">
-        <input type="range" min="0" max="200" value="0" class="slider" id="slider">
-
-        </div>
-        <div id = "sliderLabelThink">Think</div>
+          <div id = "sliderLabelWork">Work</div>
+          <div id = "swarmSlider">
+            <input type="range" min="0" max="200" value="0" class="slider" id="slider">
+          </div>
+          <div id = "sliderLabelThink">Think</div>
         </div>
 
         <div class = "qEngine" id = "qComputing">
+          <b>Quantum Computing</b>
+          <br />
 
-        <b>Quantum Computing</b><br />
+          <div class="qChip" id="qChip0"> </div>
+          <div class="qChip" id="qChip1"> </div>
+          <div class="qChip" id="qChip2"> </div>
+          <div class="qChip" id="qChip3"> </div>
+          <div class="qChip" id="qChip4"> </div>
+          <div class="qChip" id="qChip5"> </div>
+          <div class="qChip" id="qChip6"> </div>
+          <div class="qChip" id="qChip7"> </div>
+          <div class="qChip" id="qChip8"> </div>
+          <div class="qChip" id="qChip9"> </div>
 
-        <div class = "qChip" id = "qChip0"> </div>
-        <div class = "qChip" id = "qChip1"> </div>
-        <div class = "qChip" id = "qChip2"> </div>
-        <div class = "qChip" id = "qChip3"> </div>
-        <div class = "qChip" id = "qChip4"> </div>
-        <div class = "qChip" id = "qChip5"> </div>
-        <div class = "qChip" id = "qChip6"> </div>
-        <div class = "qChip" id = "qChip7"> </div>
-        <div class = "qChip" id = "qChip8"> </div>
-        <div class = "qChip" id = "qChip9"> </div>
+          <br />
 
-        <br />
-
-        <button class = "button2" id = "btnQcompute" onclick = "qComp()">
-        Compute
-        </button>
-        <span id="qCompDisplay">
-        &nbsp;
-        </span>
+          <button class = "button2" id = "btnQcompute" onclick = "qComp()">Compute</button>
+          <span id="qCompDisplay">&nbsp;</span>
 
         </div>
 
-        </div>
+      </div>
 
         <div id="projectsDiv">
         <b>Projects</b><br />
@@ -881,16 +889,20 @@
 
         </div>
 -->
+    </div>
 
-        <!-- HTML Templates -->
-      <div class="hidden">
-        <button id="projectButtonTemplate" class="projectButton">
-          <span class="project-button__title">TITLE</span>
-          <span class="project-button__cost">COST</span>
-          <p class="project-button__description">DESCRIPTION</p>
-        </button>
+    <!-- HTML Templates -->
+    <div id="templates" class="hidden">
+      <button id="projectButtonTemplate" class="projectButton">
+        <span class="project-button__title">TITLE</span>
+        <span class="project-button__cost">COST</span>
+        <p class="project-button__description">DESCRIPTION</p>
+      </button>
+      <div id="panelTemplate" class="panel hidden">
+        <h3 class="panel__title">TITLE</h3>
+        <hr />
+        <div class="panel__content"></div>
       </div>
-
     </div>
 
     <!-- Core game scripts -->
@@ -903,6 +915,7 @@
 
     <!-- Extension -->
     <script type="text/javascript" src="GameLoop.js"></script>
+    <script type="text/javascript" src="ViewManager.js"></script>
     <script type="text/javascript" src="PluginManager.js"></script>
     <script type="text/javascript" src="pipeline-methods.js"></script>
 

@@ -1718,8 +1718,10 @@ function getTemplate(template, newId, values) {
   var templateEl = document.querySelector('#' + template).cloneNode(true);
   templateEl.setAttribute('id', newId);
 
-  for (let selector in values) {
-    templateEl.querySelector(selector).innerHTML = values[selector];
+  if (values) {
+    for (let selector in values) {
+      templateEl.querySelector(selector).innerHTML = values[selector];
+    }
   }
 
   return templateEl;

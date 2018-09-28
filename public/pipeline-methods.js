@@ -1,3 +1,17 @@
+function panelRenderer(id, callback) {
+  return function () {
+    const panel = Paperclips.ViewManager.getPanel(id);
+
+    if (panel.isShown()) {
+      const returnValue = callback(panel);
+
+      if (returnValue) {
+        panel.update(returnValue);
+      }
+    }
+  }
+}
+
 function hideElement(element) {
   return function () {
     element.style.display = 'none';

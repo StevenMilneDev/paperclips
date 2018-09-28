@@ -1,6 +1,27 @@
 Paperclips.PluginManager.register({
   id: 'BetterSimPrestige',
 
+  init: () => {
+    Paperclips.ViewManager.getPanel('simControlPanel').show();
+  },
+
+  panels: {
+    simControlPanel: {
+      column: ViewManager.Columns.RIGHT,
+      name: 'Simulation Control',
+      template: `
+        <p>Processing Enhancement: <span id="simProcessingDisplay"></span></p>
+        <label for="stolenCycles">Stolen Cycles:</label>
+        <input type="range" name="stolenCycles" min="0" max="100" value="0" />
+      `,
+      renderer: panel => {
+        const value = panel.getContent().querySelector('[name="stolenCycles"]').value;
+
+        return { '#simProcessingDisplay': value };
+      }
+    }
+  },
+
   projects: {
     project300: {
       id: 'projectButton300',
