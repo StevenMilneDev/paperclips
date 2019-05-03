@@ -1,3 +1,26 @@
+function withPanel(id, callback) {
+  return function () {
+    const panel = Paperclips.ViewManager.getPanel(id);
+
+    if (panel.isShown()) {
+      const returnValue = callback(panel);
+
+      if (returnValue) {
+        panel.update(returnValue);
+      }
+    }
+  }
+}
+
+function withCounter(callback) {
+  let counter = 0;
+
+  return function () {
+    callback(counter, () => counter = -1);
+    counter++;
+  }
+}
+
 function hideElement(element) {
   return function () {
     element.style.display = 'none';
@@ -13,6 +36,38 @@ function showElement(element) {
 function renderElement(element, renderer) {
   return function () {
     element.innerHTML = renderer();
+  }
+}
+
+function withInputValue(inputName, callback) {
+  return function (){
+    const selector = '[name="' + inputName + '"]';
+    callback(document.querySelector(selector).value)
+  }
+}
+
+function toInputValue(inputName) {
+  return function (value) {
+    const selector = '[name="' + inputName + '"]';
+    document.querySelector(selector).value = value;
+  }
+}
+
+function asNumber(callback) {
+  return function (value) {
+    callback(parseInt(value));
+  }
+}
+
+function toGlobal(name) {
+  return function (value) {
+    window[name] = value;
+  }
+}
+
+function withGlobal(name, callback) {
+  return function () {
+    callback(window[name]);
   }
 }
 

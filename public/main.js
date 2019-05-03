@@ -1,4 +1,9 @@
-var game = new GameLoop();
+
+var Paperclips = {};
+
+Paperclips.game = new GameLoop();
+Paperclips.ViewManager = new ViewManager();
+Paperclips.PluginManager = new PluginManager();
 
 // If there is save data then load it
 if (hasExistingSave()) {
@@ -10,10 +15,26 @@ if (hasExistingSave()) {
   }
 }
 
-game.onFast([
+Paperclips.game.onSlow([
+  adjustWirePrice,
+  manageProjects,
+  withHumans(chain([
+    salesCalculator,
+    throttle(10, chain([
+      calculateRev,
+      stockShop
+    ])),
+    withStock(throttle(25, chain([
+      atRandom(sellStock, 0.3),
+      updateStocks
+    ]))),
+  ])),
+  throttle(250, save)
+]);
+
+Paperclips.game.onFast([
   incrementTicks,
   milestoneCheck,
-  buttonUpdate,
   withComputer(calculateOperations),
   withHumans(chain([
     calculateTrust,
@@ -45,26 +66,9 @@ game.onFast([
   ])),
   autoClipper,
   withCreativity(calculateCreativity)
-])
-
-game.onSlow([
-  adjustWirePrice,
-  manageProjects,
-  withHumans(chain([
-    salesCalculator,
-    throttle(10, chain([
-      calculateRev,
-      stockShop
-    ])),
-    withStock(throttle(25, chain([
-      atRandom(sellStock, 0.3),
-      updateStocks
-    ]))),
-  ])),
-  throttle(250, save)
 ]);
 
-game.onRender([
+Paperclips.game.onRender([
   renderStockList,
   synchroniseStratPicker,
   buttonUpdate,
@@ -183,4 +187,4 @@ game.onRender([
   ])))
 ]);
 
-game.start();
+Paperclips.game.start();

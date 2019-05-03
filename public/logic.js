@@ -1,3 +1,25 @@
+function applyProjectDefaults(config, defaults) {
+  for(let property in defaults) {
+    if (config[property] === undefined) {
+      config[property] = defaults[property];
+    }
+  }
+}
+
+function defineProjects(projectsByName) {
+  for(let name in projectsByName) {
+    let config = projectsByName[name];
+    applyProjectDefaults(config, {
+      element: null,
+      uses: 1,
+      flag: 0
+    });
+
+    window[name] = config;
+    projects.push(config);
+  }
+}
+
 function hasExistingSave() {
   return localStorage.getItem('saveGame') != null;
 }
@@ -691,18 +713,6 @@ function loadPrestige() {
 
   prestigeU = loadPrestige.prestigeU;
   prestigeS = loadPrestige.prestigeS;
-}
-
-function debug() {
-  let debugEl = document.querySelector('#debugButtons');
-
-  if(debugEl.className === 'hidden') {
-    displayMessage('Debug mode activated');
-    debugEl.className = '';
-  } else {
-    displayMessage('Debug mode deactivated');
-    debugEl.className = 'hidden';
-  }
 }
 
 function salesCalculator() {
@@ -1696,8 +1706,10 @@ function getTemplate(template, newId, values) {
   var templateEl = document.querySelector('#' + template).cloneNode(true);
   templateEl.setAttribute('id', newId);
 
-  for (let selector in values) {
-    templateEl.querySelector(selector).innerHTML = values[selector];
+  if (values) {
+    for (let selector in values) {
+      templateEl.querySelector(selector).innerHTML = values[selector];
+    }
   }
 
   return templateEl;
@@ -4084,84 +4096,6 @@ function calculateCreativity(number){
     }
 
 }
-
-function resetPrestige(){
-
-    prestigeU = 0;
-    prestigeS = 0;
-
-    localStorage.removeItem("savePrestige");
-
-}
-
-function cheatPrestigeU(){
-
-        prestigeU++;
-        var savePrestige = {
-        prestigeU: prestigeU,
-        prestigeS: prestigeS,
-        }
-        localStorage.setItem("savePrestige",JSON.stringify(savePrestige));
-
-}
-
-function cheatPrestigeS(){
-
-        prestigeS++;
-        var savePrestige = {
-        prestigeU: prestigeU,
-        prestigeS: prestigeS,
-        }
-        localStorage.setItem("savePrestige",JSON.stringify(savePrestige));
-
-}
-
-function setB(){
-    battleNumbers[1] = 7;
-}
-
-function cheatClips(){
-    clips = clips + 100000000;
-    unusedClips = unusedClips + 100000000;
-    displayMessage("you just cheated");
-    }
-
-function cheatMoney(){
-    funds = funds + 10000000;
-    fundsElement.innerHTML = formatWithCommas(funds,2);
-    displayMessage("LIZA just cheated");
-    }
-
-function cheatTrust(){
-    trust = trust+1;
-    displayMessage("Hilary is nice. Also, Liza just cheated");
-    }
-
-function cheatOps(){
-    standardOps = standardOps + 10000;
-    displayMessage("you just cheated, Liza");
-    }
-
-function cheatCreat(){
-    creativityOn = 1;
-    creativity = creativity + 1000;
-    displayMessage("Liza just cheated. Very creative!");
-    }
-
-function cheatYomi(){
-    yomi = yomi + 1000000;
-    yomiDisplayElement.innerHTML = formatWithCommas(yomi);
-    displayMessage("you just cheated");
-    }
-
-function cheatHypno(){
-    hypnoDroneEvent();
-    }
-
-function zeroMatter(){
-    availableMatter = 0;
-    displayMessage("you just cheated");
-    }
 
 
 function calculateTrust(){

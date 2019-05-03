@@ -1,65 +1,46 @@
 (function () {
 
-  const Type = Object.freeze({
-    SLOW: 'SLOW',
-    FAST: 'FAST',
-    RENDER: 'RENDER'
-  })
-
-  const State = Object.freeze({
-    STOPPED: 'STOPPED',
-    RUNNING: 'RUNNING'
-  })
-
   /**
    * @class GameLoop
    * This class encapsulates the game loop logic.
-   * @param {Object} config A config object containing initial values for settings
    */
-  function GameLoop (config) {
-    config = config || {}
-
-    this.listenersByType = {}
-    this.state = State.STOPPED
+  function GameLoop () {
+    this.render = new RenderLoop();
+    this.slow = new Loop({ speed: 100 });
+    this.fast = new Loop({ speed: 10 });
+    this.custom = {};
   }
 
   /**
-   * @static
-   * An enum which keys each of the loop types supported by the GameLoop.
+   * Adds a custom loop to be managed by the game loop manager.
+   * @param {String} name The name of the custom loop
+   * @param {Loop} loop The loop to be added
    */
-  GameLoop.Type = Type
-
-  /**
-   * @static
-   * An enum which keys each of the states that the GameLoop can be in.
-   */
-  GameLoop.State = State
+  GameLoop.prototype.register = function register(name, loop) {
+    this.custom[name] = loop;
+  }
 
   /**
    * Starts running the game loops at the configured speeds.
    */
   GameLoop.prototype.start = function start() {
-    if(this.state === State.RUNNING) return
+    this.slow.start();
+    this.fast.start();
+    this.render.start();
 
-    this.renderId = requestAnimationFrame(this.render.bind(this))
-    this.slowId = setInterval(this.slow.bind(this), 100)
-    this.fastId = setInterval(this.fast.bind(this), 10)
-
-    this.state = State.RUNNING
-  }
+    this.eachCustom( loop => loop.start() );
+  };
 
   /**
    * Stops all of the game loops, effectively pausing the game.
    */
   GameLoop.prototype.stop = function stop() {
-    if(this.state === State.STOPPED) return
+    this.slow.stop();
+    this.fast.stop();
+    this.render.stop();
 
-    cancelAnimationFrame(this.renderId)
-    clearInterval(this.slowId)
-    clearInterval(this.fastId)
-
-    this.state = State.STOPPED
-  }
+    this.eachCustom( loop => loop.stop() );
+  };
 
   /**
    * Registers a collection of callbacks to be invoked on each iteration of the
@@ -67,10 +48,8 @@
    * @param {Function[]} callbacks An array of callbacks to invoke on the slow loop
    */
   GameLoop.prototype.onSlow = function onSlow(callbacks) {
-    for(let callback of callbacks) {
-      this.register(Type.SLOW, callback)
-    }
-  }
+    this.slow.add(callbacks);
+  };
 
   /**
    * Registers a collection of callbacks to be invoked on each iteration of the
@@ -78,10 +57,8 @@
    * @param {Function[]} callbacks An array of callbacks to invoke on the fast loop
    */
   GameLoop.prototype.onFast = function onFast(callbacks) {
-    for(let callback of callbacks) {
-      this.register(Type.FAST, callback)
-    }
-  }
+    this.fast.add(callbacks);
+  };
 
   /**
    * Registers a collection of callbacks to be invoked on each iteration of the
@@ -89,77 +66,23 @@
    * @param {Function[]} callbacks An array of callbacks to invoke on the render loop
    */
   GameLoop.prototype.onRender = function onRender(callbacks) {
-    for(let callback of callbacks) {
-      this.register(Type.RENDER, callback)
-    }
-  }
+    this.render.add(callbacks);
+  };
 
   /**
-   * Registers the provided function to be called in the specified loop.
-   * @param {LoopType} loop The loop to call the function in
-   * @param {Function|Function[]} fn The function to call when the loop is invoked
+   * Iterates over all of the registered custom loops invoking the provided
+   * function.
+   * @param {Function} callback The function invoked for each custom loop
    */
-  GameLoop.prototype.register = function register(loop, fn) {
-    let listeners = this.listenersByType[loop]
+  GameLoop.prototype.eachCustom = function eachCustom(callback) {
+    const results = [];
 
-    if(!listeners) {
-      listeners = this.listenersByType[loop] = []
+    for (let name in this.custom) {
+      results.push(callback(this.custom[name], name));
     }
 
-    listeners.push(fn)
-  }
+    return results;
+  };
 
-  GameLoop.prototype.unregister = function unregister(loop, fn) {
-    const listeners = this.listenersByType[loop]
-    const index = listeners.indexOf(fn)
-
-    if(index >= 0) {
-      listeners.splice(index, 1)
-    }
-  }
-
-  /**
-   * @private
-   * The implementation for the slow game loop.
-   */
-  GameLoop.prototype.slow = function slow() {
-    const listeners = this.listenersByType[Type.SLOW]
-
-    if(listeners) {
-      listeners.map(fn => fn())
-    }
-  }
-
-  /**
-   * @private
-   * The implementation for the fast game loop.
-   */
-  GameLoop.prototype.fast = function fast() {
-    const listeners = this.listenersByType[Type.FAST]
-
-    if(listeners) {
-      listeners.map(fn => fn())
-    }
-  }
-
-  /**
-   * @private
-   * The implementation for the render loop which updates the DOM before the
-   * browser redraws the page.
-   */
-  GameLoop.prototype.render = function render() {
-    const listeners = this.listenersByType[Type.RENDER]
-
-    if(listeners) {
-      try {
-        listeners.map(fn => fn())
-      } catch(e) {
-        console.error(e)
-      }
-    }
-
-    this.renderId = requestAnimationFrame(this.render.bind(this))
-  }
-
-  window.GameLoop = GameLoop
+  window.GameLoop = GameLoop;
 })();

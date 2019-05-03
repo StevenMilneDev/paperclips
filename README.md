@@ -24,6 +24,9 @@ The following pages contain technical information about how Universal Paperclips
 ## Change Log
 This mirrored version of Universal Paperclips has been modified in the following ways;
 
+- Added a ViewManager to abstract panel creation and management to plugins
+- Added performance monitoring to the debug menu
+- Made debug buttons/menu show and hide when CTRL+ALT+SHIF+D are pressed
 - Refactored the game loop logic to be more concise and allow extensions
 - Added a custom project that can be used in prestige games
 - Refactored project management code, moving it into the slow game loop to improve performance
