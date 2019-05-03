@@ -1,9 +1,30 @@
 
+body {
+  margin: 0;
+}
+
+#topDiv,
+#leftColumn {
+  margin-left: 8px;
+}
+
+#prestigeDiv {
+  margin-left: -8px;
+}
+
+.panel {
+  margin-top: 10px;
+}
+
 .panel p {
   margin: 0;
 }
 
 .panel__title {
   font-size: 1rem;
+  margin: 0;
+}
+
+.panel h4 {
   margin: 0;
 }

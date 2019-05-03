@@ -11,7 +11,7 @@ Paperclips.PluginManager.register({
 
   panels: {
     debugPanel: {
-      column: ViewManager.Columns.LEFT,
+      column: ViewManager.Columns.EXTRA,
       name: 'Debug Controls',
       template: `
         <button id="forceSaveButton" class="button2" onclick="save()">FORCE SAVE</button><br />

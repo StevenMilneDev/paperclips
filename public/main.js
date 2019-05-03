@@ -35,7 +35,6 @@ Paperclips.game.onSlow([
 Paperclips.game.onFast([
   incrementTicks,
   milestoneCheck,
-  buttonUpdate,
   withComputer(calculateOperations),
   withHumans(chain([
     calculateTrust,

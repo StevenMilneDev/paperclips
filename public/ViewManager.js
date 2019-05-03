@@ -3,7 +3,8 @@
   const Columns = Object.freeze({
     LEFT: 'LEFT',
     MIDDLE: 'MIDDLE',
-    RIGHT: 'RIGHT'
+    RIGHT: 'RIGHT',
+    EXTRA: 'EXTRA'
   });
 
   function Panel(id, name, template) {
@@ -19,6 +20,14 @@
 
   Panel.prototype.getContent = function getContent() {
     return this.element.querySelector('.panel__content');
+  }
+
+  Panel.prototype.query = function query(selector) {
+    return this.element.querySelector(selector);
+  }
+
+  Panel.prototype.getValue = function getValue(selector) {
+    return this.element.querySelector(selector).value;
   }
 
   Panel.prototype.isShown = function isShown() {
@@ -102,7 +111,7 @@
     this.getPanelContainer(column).appendChild(panel.getElement());
 
     if (renderer) {
-      Paperclips.game.onRender(panelRenderer(id, renderer));
+      Paperclips.game.onRender(withPanel(id, renderer));
     }
 
     return panel;
@@ -119,7 +128,8 @@
     const idsByColumn = {
       [Columns.LEFT]: '#leftColumn',
       [Columns.MIDDLE]: '#middleColumn',
-      [Columns.RIGHT]: '#rightColumn'
+      [Columns.RIGHT]: '#rightColumn',
+      [Columns.EXTRA]: '#extraColumn'
     };
 
     return document.querySelector(idsByColumn[column]);

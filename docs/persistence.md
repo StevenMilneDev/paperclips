@@ -79,3 +79,12 @@ The game uses local storage within the browser to store its data. Local storage 
 - `savePrestige` - Stores the number of times the game has been reset
 
 All of the above items are duplicated twice with a numeric suffix except from `savePrestige`.
+
+### Refactoring Ideas
+Both persistence and state management could do with a refactor as neither are very expandable or maintainable. The `save()` function is 288 lines long and each new item being persisted increases that by a line as each state entry is added to the `saveGame` variables individually. This makes the persistence system hard to extend for the plugins.
+
+Ideally the state management would be refactored so that the game state isn't held as global variables. But this would be hard due to the monolithic nature of the whole game implementation. If the game was implemented as a collection of independent modules then the game state could be drastically simplified, but this would be a very large refactor. Instead I think it would be better to refactor from the storage end first.
+
+A `StorageManager` could be implemented which would take away some of the responsibility from `save()`, specifically the interaction with LocalStorage. It would also make it easier to migrate storage from LocalStorage to other things like IndexedDB or even server-side storage. The core game could still generate it's JSON encoded save states but hand them off for `StorageManager` to store. The `StorageManager` could also expose `StorageManager.onSave()` to allow plugins to hook into the save and even loading events.
+
+A `StateManager` could also be implemented which sits on top of `StorageManager`, modules/plugins could register themselves with the state manager which could return an object which is managed for them and serialised into JSON on save without the module needing to do anything. The state manager would aggregate all of game logic together from scoped modules into a single state which can be handed to the storage manager.

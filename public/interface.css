@@ -342,6 +342,12 @@ canvas {
   margin-left: 10px;
 }
 
+#extraColumn {
+  float: left;
+  width: 320px;
+  margin-left: 10px;
+}
+
 #investmentDiv1 {
   float: left;
   width: 64px;
