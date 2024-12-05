@@ -12,7 +12,7 @@
     "url": "git+ssh://git@bitbucket.org/IAmTehCreator/paperclips.git"
   },
   "publishConfig": {
-    "registry": "https://nexus.smilne.co.uk/repository/npm-private/"
+    "registry": "https://nexus.smilne.dev/repository/npm-private/"
   },
   "keywords": [
     "game",
